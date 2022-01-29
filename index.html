@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Портфолио Саши Буяк</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+  <link rel="shortcut icon" href="./favicon.ico" />
+
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;600&family=Roboto:wght@300;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style/window.css" />
+  <link rel="stylesheet" href="./style/header.css" />
+  <link rel="stylesheet" href="./style/gallery.css" />
+  <link rel="stylesheet" href="./style/footer.css" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+
+<body>
+
+
+  <div class="headerContainer">
+    <canvas id="canvas"></canvas>
+    <div class="avatar"></div>
+  </div>
+
+  <div class="descriptionContainer">
+    <h2>Это моё портфолио 🐢</h2>
+  </div>
+
+  <div class="galleryContainer">
+
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/12.png"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/14.png"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/13.png"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/16.png"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/15.webp"></div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/2.webp"></div>
+        </div>
+
+        <!-- <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/1.webp"></div>
+        </div> -->
+
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/3.webp"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/4.webp"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/5.webp"></div>
+        </div>
+        <!-- <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/6.webp"></div>
+        </div> -->
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/7.webp"></div>
+        </div>
+        <!-- <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/8.webp"></div>
+        </div> -->
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/9.webp"></div>
+        </div>
+        <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/10.webp"></div>
+        </div>
+        <!-- <div class="swiper-slide">
+          <div class="swiper-zoom-container"><img src="./images/11.webp"></div>
+        </div> -->
+
+
+
+
+
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        loop: true,
+        zoom: true,
+        pagination: {
+          el: ".swiper-pagination",
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+
+  </div>
+
+
+  <div class="footerContainer">
+
+    <div class="widthControlContainer">
+      <div class="widthControl">
+
+        <div class="footer">
+          <div class="name">
+            Саша Буяк
+          </div>
+          <div class="contacts">
+            <a href="tel:89094323033">+7(909)-432-30-33</a>
+            <a href="mailto:buyak1975@gmail.com">buyak1975@gmail.com</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth && document.documentElement.clientWidth ?
+        Math.min(window.innerWidth, document.documentElement.clientWidth) :
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.getElementsByTagName('body')[0].clientWidth;
+
+      canvas.height = canvas.parentNode.clientHeight;
+    }
+    resize();
+    window.addEventListener(`resize`, event => {
+      resize()
+    }, false);
+
+
+
+    function drawLine(x0, y0, length, rotation) {
+      ctx.beginPath();
+      ctx.moveTo(x0, y0);
+      ctx.lineTo(x0 + Math.sin(time + rotation) * length, y0 + Math.cos(time + rotation) * length);
+      ctx.strokeStyle = "#FFF";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    let time = 0;
+    const targetLength = 6;
+    let length = 0;
+    const cellSize = 24;
+    const animate = () => {
+      if (length < targetLength) {
+        length += 0.07;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let x = 0; x < canvas.width + cellSize; x = x + cellSize) {
+        for (let y = 0; y < canvas.height + cellSize; y = y + cellSize) {
+          drawLine(x, y, length + length / 2 * Math.sin(time), Math.sqrt((canvas.width / 2 - x) ** 2 + (canvas.height - y) ** 2) * 0.01);
+        }
+      }
+      time += 0.01;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</body>
+
+</html>
